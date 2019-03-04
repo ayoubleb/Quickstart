@@ -13,22 +13,24 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @RequestMapping("/courses")
-    public List<Course> getAllCourses(){
+    @RequestMapping("/topics/{id}/courses")
+    public List<Course> getAllCourses(@PathVariable String id){
 
-        return courseService.getAllCourses();
+        return courseService.getAllCourses(id);
     }
 
-    @RequestMapping("/courses/{id}")
+    @RequestMapping("/topics/{topicId}/courses/{id}")
     public Course getCourse(@PathVariable String id) {
 
         return courseService.getCourse(id);
     }
 
-    @RequestMapping(value = "/courses",method = RequestMethod.POST)
-    public void  addupdateCours(@RequestBody Course course){
+    @RequestMapping(value = "/topics/{topicId}/courses",method = RequestMethod.POST)
+    public void  addCourse(@RequestBody Course course){
         courseService.addCourse(course);
     }
+
+
     @RequestMapping(value = "/courses/{id}",method = RequestMethod.PUT)
     public void  updateCourse(@RequestBody Course course, @PathVariable String id){
         courseService.updateCourse(id, course);
